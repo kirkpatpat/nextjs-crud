@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
+import { BASE_API_URL } from '@/app/utils/constants';
 
 interface Item {
   id: number;
@@ -23,7 +24,7 @@ const ItemDetailPage = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://127.0.0.1:5000/api/items/${id}`)
+      axios.get(`${BASE_API_URL}/api/items/${id}`)
         .then(response => {
           setItem(response.data);
           setUpdatedName(response.data.name);
@@ -38,7 +39,7 @@ const ItemDetailPage = () => {
 
   const handleDelete = () => {
     if (item?.id) {
-      axios.delete(`http://127.0.0.1:5000/api/items/${item.id}`)
+      axios.delete(`${BASE_API_URL}/api/items/${item.id}`)
         .then(() => router.push('/'))
         .catch(() => setError('Failed to delete item'));
     }
@@ -46,7 +47,7 @@ const ItemDetailPage = () => {
 
   const handleUpdate = () => {
     if (item?.id) {
-      axios.put(`http://127.0.0.1:5000/api/items/${item.id}`, {
+      axios.put(`${BASE_API_URL}/api/items/${item.id}`, {
         name: updatedName,
         description: updatedDescription,
         price: updatedPrice,
