@@ -37,7 +37,7 @@ const HomePage = () => {
               {error && <p>{error}</p>}
 
               <div>
-                <Link className='absolute w-full text-white bg-blue-700 hover:bg-blue-800 rounded-2xl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' href="/create-item">
+                <Link className='absolute text-white bg-blue-700 hover:bg-blue-800 rounded-2xl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' href="/create-item">
                   Create New Item
                 </Link>
                 <button onClick={() => signOut()} className='absolute top-30 right-10 text-white bg-blue-700 hover:bg-blue-800 rounded-2xl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>Sign out</button>
