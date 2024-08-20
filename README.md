@@ -8,7 +8,7 @@ npm install
 pip install Flask-Cors
 ```
 
-Create ```.enc.local``` file:
+Create ```.env.local``` file:
 
 ```
 NEXTAUTH_SECRET=
