@@ -78,7 +78,7 @@ const ItemDetailPage = () => {
         {isEditing ? (
           <div>
             <h5 className='text-center text-xl font-medium text-gray-900 dark:text-white'>EDIT ITEM</h5>
-            <form onSubmit={(e) => {
+            <form className='space-y-6' onSubmit={(e) => {
               e.preventDefault();
               handleUpdate();
             }}>
