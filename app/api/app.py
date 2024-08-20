@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS  # Import CORS
-from http.server import BaseHTTPRequestHandler
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all origins
