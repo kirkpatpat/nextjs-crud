@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { BASE_API_URL } from '@/app/utils/constants';
 
 interface Item {
   id: number;
@@ -19,7 +20,7 @@ const HomePage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/items')
+    axios.get(`${BASE_API_URL}/api/items`)
       .then(response => setItems(response.data))
       .catch(() => setError('Failed to load items'));
   }, []);
