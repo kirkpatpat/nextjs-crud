@@ -65,6 +65,7 @@ const ItemDetailPage = () => {
 
   return (
     <div className='bg-gray-900'>
+      <h1 className='text-5xl text-center p-5 bg-gray-800'>{item.name}</h1>
       <div className="flex m-5">
         <a href="/" className="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
           <svg className="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -76,35 +77,35 @@ const ItemDetailPage = () => {
       <div className='m-auto w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700'>
         {isEditing ? (
           <div>
-            <h1>Edit Item</h1>
+            <h5 className='text-center text-xl font-medium text-gray-900 dark:text-white'>EDIT ITEM</h5>
             <form onSubmit={(e) => {
               e.preventDefault();
               handleUpdate();
             }}>
               <div>
-                <label>Name</label>
+                <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Name</label>
                 <input
                   type="text"
                   value={updatedName}
                   onChange={(e) => setUpdatedName(e.target.value)}
-                  className="mt-1 block w-full p-2 border rounded"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
               <div>
-                <label>Description</label>
+                <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Description</label>
                 <textarea
                   value={updatedDescription}
                   onChange={(e) => setUpdatedDescription(e.target.value)}
-                  className="mt-1 block w-full p-2 border rounded"
+                  className="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
               <div>
-                <label>Price</label>
+                <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Price</label>
                 <input
                   type="number"
                   value={updatedPrice}
                   onChange={(e) => setUpdatedPrice(parseFloat(e.target.value))}
-                  className="mt-1 block w-full p-2 border rounded"
+                  className="g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 />
               </div>
               <button type="submit" className="mt-4 p-2 bg-blue-500 text-white rounded">Save</button>
@@ -118,10 +119,19 @@ const ItemDetailPage = () => {
             </form>
           </div>
         ) : (
-          <div>
-            <h1>{item.name}</h1>
-            <p>{item.description}</p>
-            <p>Price: ${item.price}</p>
+          <div className='space-y-6'>
+            <div>
+              <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Name:</label>
+              <p className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white'>{item.name}</p>
+            </div>
+            <div>
+              <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Description:</label>
+              <p className='g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white'>{item.description}</p>
+            </div>
+            <div>
+              <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Price:</label>
+              <p className='g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white'>Price: ${item.price}</p>
+            </div>
             {error && <p>{error}</p>}
             <button onClick={() => setIsEditing(true)} className="mt-4 p-2 bg-blue-500 text-white rounded">Edit</button>
             <button onClick={handleDelete} className="mt-4 ml-2 p-2 bg-red-500 text-white rounded">Delete</button>
