@@ -19,7 +19,7 @@ const HomePage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/items')
+    axios.get('https://nextjs-crud-pearl.vercel.app/api/items')
       .then(response => setItems(response.data))
       .catch(() => setError('Failed to load items'));
   }, []);
