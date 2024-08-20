@@ -16,12 +16,19 @@ const ItemDetailPage = () => {
   const router = useRouter();
   const [item, setItem] = useState<Item | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [updatedName, setUpdatedName] = useState('');
+  const [updatedDescription, setUpdatedDescription] = useState('');
+  const [updatedPrice, setUpdatedPrice] = useState<number | string>('');
 
   useEffect(() => {
     if (id) {
       axios.get(`http://127.0.0.1:5000/api/items/${id}`)
         .then(response => {
           setItem(response.data);
+          setUpdatedName(response.data.name);
+          setUpdatedDescription(response.data.description);
+          setUpdatedPrice(response.data.price);
         })
         .catch(() => {
           setError('Failed to fetch item');
@@ -38,8 +45,21 @@ const ItemDetailPage = () => {
   };
 
   const handleUpdate = () => {
-    // Handle update
+    if (item?.id) {
+      axios.put(`http://127.0.0.1:5000/api/items/${item.id}`, {
+        name: updatedName,
+        description: updatedDescription,
+        price: updatedPrice,
+      })
+        .then(response => {
+          setItem(response.data); // Update the local state with the new data
+          setIsEditing(false);
+          router.refresh(); // Refresh the page to ensure the changes are displayed
+        })
+        .catch(() => setError('Failed to update item'));
+    }
   };
+  
 
   if (!item) return <p>Loading...</p>;
 
@@ -54,12 +74,59 @@ const ItemDetailPage = () => {
       </div>
 
       <div className='m-auto w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700'>
-        <h1>{item.name}</h1>
-        <p>{item.description}</p>
-        <p>Price: ${item.price}</p>
-        {error && <p>{error}</p>}
-        <button onClick={handleUpdate}>Update</button>
-        <button onClick={handleDelete}>Delete</button>
+        {isEditing ? (
+          <div>
+            <h1>Edit Item</h1>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              handleUpdate();
+            }}>
+              <div>
+                <label>Name</label>
+                <input
+                  type="text"
+                  value={updatedName}
+                  onChange={(e) => setUpdatedName(e.target.value)}
+                  className="mt-1 block w-full p-2 border rounded"
+                />
+              </div>
+              <div>
+                <label>Description</label>
+                <textarea
+                  value={updatedDescription}
+                  onChange={(e) => setUpdatedDescription(e.target.value)}
+                  className="mt-1 block w-full p-2 border rounded"
+                />
+              </div>
+              <div>
+                <label>Price</label>
+                <input
+                  type="number"
+                  value={updatedPrice}
+                  onChange={(e) => setUpdatedPrice(parseFloat(e.target.value))}
+                  className="mt-1 block w-full p-2 border rounded"
+                />
+              </div>
+              <button type="submit" className="mt-4 p-2 bg-blue-500 text-white rounded">Save</button>
+              <button
+                type="button"
+                className="mt-4 ml-2 p-2 bg-gray-500 text-white rounded"
+                onClick={() => setIsEditing(false)}
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        ) : (
+          <div>
+            <h1>{item.name}</h1>
+            <p>{item.description}</p>
+            <p>Price: ${item.price}</p>
+            {error && <p>{error}</p>}
+            <button onClick={() => setIsEditing(true)} className="mt-4 p-2 bg-blue-500 text-white rounded">Edit</button>
+            <button onClick={handleDelete} className="mt-4 ml-2 p-2 bg-red-500 text-white rounded">Delete</button>
+          </div>
+        )}
       </div>
     </div>
   );
