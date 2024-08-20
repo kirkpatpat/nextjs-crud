@@ -23,7 +23,7 @@ const ItemDetailPage = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://127.0.0.1:5000/api/items/${id}`)
+      axios.get(`https://nextjs-crud-pearl.vercel.app/api/items/${id}`)
         .then(response => {
           setItem(response.data);
           setUpdatedName(response.data.name);
