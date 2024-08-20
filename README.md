@@ -8,6 +8,18 @@ npm install
 pip install Flask-Cors
 ```
 
+Create ```.enc.local``` file:
+
+```
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+NEXT_PUBLIC_BASE_API_URL=
+```
+
 Run the development server:
 
 ```bash
