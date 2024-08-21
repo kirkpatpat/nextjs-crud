@@ -40,6 +40,6 @@ Run the python API file using terminal:
 - ```python3 app.py```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-Access it by going to https://nextjs-crud-iota-two.vercel.app/
 
+Access it by going to https://nextjs-crud-jnw3rtd64-kirks-projects-17e1e113.vercel.app/
 
